@@ -9,6 +9,11 @@ def getCpu():
     f.close
     cpuTemp = str(int(cpuTemp) / 1000)
     sleep(1)
+
+def cpuLoop():
+    getCpu()
+    labelCpu.set(cpuTemp[:5])
+    root.after(1000, cpuLoop)
     
 root = Tk()
 
@@ -34,11 +39,8 @@ gpuString.grid(row=0)
 gpuOut = Label(bottomFrame, textvariable=labelCpu)
 gpuOut.grid(row=0, column=1)
 
-while True:
-    getCpu()
-    labelCpu.set(cpuTemp[:5])
-    root.update_idletasks()
-    
+cpuLoop()
+
 root.mainloop()
 
 
